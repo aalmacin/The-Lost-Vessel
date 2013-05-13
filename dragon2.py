@@ -18,7 +18,7 @@ def main_menu():
     print("2) Show options.")
     print("Hit Return key to exit.")
 
-    option_num = raw_input(">>>")
+    option_num = raw_input(">>> ")
     if option_num == "1":
       start_game()
     elif option_num == "2":
