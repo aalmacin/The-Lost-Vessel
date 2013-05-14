@@ -18,8 +18,7 @@ def check_cave(chosen_cave):
   time.sleep(2)
   print ('It is dark and spooky...')
   time.sleep(2)
-  print ('A large dragon jumps out in front of you! He opens his jaws and...')
-  print
+  print ("A large dragon jumps out in front of you! He opens his jaws and...\n")
   time.sleep(2)
 
   friendly_cave = random.randint(1, 2)
