@@ -13,7 +13,7 @@ def display_intro():
 def start_game():
   outcomes = get_outcomes()
 
-  choices = [1,2,3]
+  choices = 3*['']
   choices[0] = choose_place("Do you want to investigate the front or back of the ship?", "1 for front or 2 for back")
 
   if not choices[0]:
