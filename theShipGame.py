@@ -38,7 +38,7 @@ def start_game():
       if choices[2]:
         narrate_sleep("After leaving the chest...|You saw an item.|You picked it up then...")
 
-  print(outcomes[choices[0]][choices[1]][choices[2]])
+  narrate_sleep(outcomes[choices[0]][choices[1]][choices[2]])
 
 def narrate_sleep(messages, secs = 1):
   for message in messages.split("|"):
