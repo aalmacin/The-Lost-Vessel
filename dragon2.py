@@ -26,6 +26,10 @@ def main_menu():
     else:
       game_running = False
 
+def set_dragons
+  a = 8*["N"]
+  a[random.randint(0,7)] = "Y"
+
 def start_game():
   play_again = True
   while play_again:
