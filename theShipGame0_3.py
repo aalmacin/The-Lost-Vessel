@@ -7,8 +7,8 @@
 import random
 import time
 
-#def display_intro():
-  #narrate_sleep("You are a scuba diver searching for a lost vessel that sunk in the Pacific Ocean.|There's an abundance of tropical fish and sea creatures swimming beside you.|Your exploration reveals nothing significant until...|You discover a ship that matches what you are looking for.|You are now swimming beside this massive ship.|But you wanna know more about it.", 2)
+def display_intro():
+  narrate_sleep("You are a scuba diver searching for a lost vessel that sunk in the Pacific Ocean.|There's an abundance of tropical fish and sea creatures swimming beside you.|Your exploration reveals nothing significant until...|You discover a ship that matches what you are looking for.|You are now swimming beside this massive ship.|But you wanna know more about it.", 2)
 
 def start_game():
   outcomes = get_outcomes()
@@ -96,7 +96,7 @@ def choose_place(question, num_choice):
 
 def main():
   while True:
-#    display_intro()
+    display_intro()
     start_game()
     if(not raw_input("Do you want to play again? (yes or no): ").lower() in ["yes","y"]): break
 
