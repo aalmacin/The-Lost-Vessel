@@ -1,3 +1,9 @@
+''' Author Name: Aldrin Jerome Almacin
+    Last Modified by: Aldrin Jerome Almacin
+    Date last Modified:
+    Program description: A game that asks the user to select paths that would lead to finding a treasure. There are 7 negative outcomes and one positive outcome. The player can then play the game again if desired.
+    Revision History: 0.2
+'''
 import random
 import time
 
