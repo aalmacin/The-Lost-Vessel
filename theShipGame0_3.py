@@ -13,6 +13,8 @@ import time
     Purpose: Displays the intro using narrate sleep.
     Input: None
     Output: The Narrated Introduction
+    Params: None
+    Returns: None
 """
 def display_intro():
   narrate_sleep(\
@@ -26,9 +28,11 @@ def display_intro():
 
 """
     Function: Start Game
-    Purpose: Method to be called to start the game.
+    Purpose: Method to be called to start the game. In this method, the three choices are gathered from the user and the outcome based on those choices are narrated.
     Input: The choices the user selected.
     Output: The Narrated outcome
+    Params: None
+    Returns: None
 """
 def start_game():
   NONVALID_VALUE = 2
@@ -63,6 +67,8 @@ def start_game():
     Purpose: Method used to get where the user wants to go in the first node.
     Input: The users decision. Back or front of the ship
     Output: The prompt on whether to go to the front or the back of the ship
+    Params: None
+    Returns: The first decision
 """
 def get_first_choice():
   return choose_place("Do you want to investigate the front or back of the ship?", "1 for front or 2 for back")
@@ -72,6 +78,9 @@ def get_first_choice():
     Purpose: Method used to get where the user wants to go in the second node. The story is based on the first decision.
     Input: The users second decision.
     Output: The prompt on which place the user wants to go to base on the first node decision
+    Params:
+      back_of_the_ship = boolean value used to determine whether the user selected the back of the ship on the first decision node
+    Returns: The second decision
 """
 def get_second_choice(back_of_the_ship):
   # The number selected by the user is also used as a boolean. 0 to false, 1 to true
@@ -89,6 +98,10 @@ def get_second_choice(back_of_the_ship):
     Purpose: Method used to get where the user wants to go in the third node. The decision is based on the first two decisions.
     Input: The users third decision.
     Output: The prompt on which place the user wants to go to base on the first and second node decision.
+    Params:
+      back_of_the_ship = boolean value used to determine whether the user selected the back of the ship on the first decision node
+      picked_two = boolean value used to determine whether the user selected the second option on the second decision node
+    Returns: The third decision
 """
 def get_third_choice(back_of_the_ship, picked_two):
   # The number selected by the user is also used as a boolean. 0 to false, 1 to true
@@ -135,6 +148,11 @@ def get_third_choice(back_of_the_ship, picked_two):
     Purpose: Method used to show the user messages from a string with separators. The program the sleeps for 1 or any number of seconds specified.
     Input: None
     Output: The messages sent by the user
+    Params:
+      messages: String with a separator which separates sentences or set of words.
+      secs: The amount of time the program sleeps
+      split_by: The separator used to separate the string
+    Returns: None
 """
 def narrate_sleep(messages, secs = 1, split_by = "|"):
   for message in messages.split(split_by):
