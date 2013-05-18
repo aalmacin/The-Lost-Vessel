@@ -108,7 +108,7 @@ def get_second_choice(back_of_the_ship):
       + "After getting in...|"
       + "You now see a corridor and a staircase."
     )
-    return choose_place("Which way would you go?", "1 - Go through the corridor.|2 - Climb up the staircase.|3 - Swim back outside the ship.")
+    return choose_place("Which way would you go?", "1 - Go through the corridor.|2 - Swim up the staircase.|3 - Swim back outside the ship.")
 
 """
     Function: Get third choice
@@ -137,8 +137,8 @@ def get_third_choice(back_of_the_ship, picked_two):
         + "Swim...|"
         + "You found a giant wardrobe..."
       )
-      left_wardrobe_alone = choose_place("Do you want to get in?","1 - Get in.|2 - Leave it alone.|3 - Try and swim back outside the ship.")
-      if left_wardrobe_alone:
+      left_wardrobe_alone = choose_place("Do you want to get in?","1 - Get in.|2 - Leave it alone.")
+      if left_wardrobe_alone == 1:
         narrate_sleep(
           "After leaving the wardrobe alone...|"
           + "You found a place which looks safer.|"
@@ -173,8 +173,8 @@ def get_third_choice(back_of_the_ship, picked_two):
         + "It fell on something deeper...|"
         + "You discovered that the room have a secret basement..."
       )
-      left_secret_basement_alone = choose_place("Do you want to enter the secret basement?","1 - Enter the secret basement.|2 - Continue investigating inside the officers quarters.|3 - Swim back outside the ship.")
-      if left_secret_basement_alone:
+      left_secret_basement_alone = choose_place("Do you want to enter the secret basement?","1 - Enter the secret basement.|2 - Continue investigating inside the officers quarters.")
+      if left_secret_basement_alone == 1:
         narrate_sleep(
           "There are very old items in the quarters...|"
           + "You looked to the left and you see...|"
@@ -217,21 +217,97 @@ def get_third_choice(back_of_the_ship, picked_two):
       return left_secret_basement_alone
   else:
     if picked_two:
-      narrate_sleep("You selected to dive through the right corridor.|After diving for a few meters more, you now see two strange rooms.")
-      second_room = choose_place("Which room would you get in?", "1 or 2 or 3 to swim back")
-      narrate_sleep("After going in the room...|You saw an item.|You picked it up then...")
-
-      return second_room
-    else:
-      narrate_sleep("You selected to dive through the left corridor.|At the end of the corridor, you now see a hole in the floor and a casket.")
-      opened_casket = choose_place("Do you want to go in the hole or do you want to open the casket?", "1 to go in the hole or 2 to open the casket or 3 to swim back")
-
-      if opened_casket:
-        narrate_sleep("You open the casket...|Something is inside...")
+      narrate_sleep(
+        "You selected to swim up the staircase.|"
+        + "There is a door at the end of the staircase.|"
+        + "There is a label that says...|"
+        + "Engine Room.|"
+        + "You are now in the engine room.|"
+        + "The engine is massive.|"
+        + "You are amazed on how this engine can make the vessel run.|"
+        + "You went around the room.|"
+        + "You then saw a lever.|"
+        + "You are now very curious on what this lever does."
+      )
+      examine_lever = choose_place("What are you going to do with the lever?", "1 - Pull the lever.|2 - Examine where it's connected.")
+      if examine_lever == 1:
+        narrate_sleep(
+          "The lever is rusty...|"
+          + "It is connected to a separate room.|"
+          + "You went inside that room.|"
+          + "Nothing interesting in the room except it's filled with filth.|"
+          + "You decided to go outside the room.|"
+          + "But you went out the wrong door.|"
+          + "Interesting...|"
+          + "Now you are in a room filled tools and mechanical parts.|"
+          + "You are examining these items.|"
+          + "When...|"
+          + "You saw a very interesting item...|"
+          + "You picked it up then..."
+        )
       else:
-        narrate_sleep("After going in the hole...|You saw an item.|You picked it up then...")
+        narrate_sleep(
+          "After pulling the lever...|"
+          + "Nothing happened.|"
+          + "You decided to just leave the engine room.|"
+          + "You are about to go outside the engine room.|"
+          + "When...|"
+          + "You saw an old clock in the corner of the room.|"
+          + "The clock looks interesting.|"
+          + "It looks like it's made of gold.|"
+          + "You got really excited.|"
+          + "You picked it up then..."
+        )
 
-      return opened_casket
+      return examine_lever
+    else:
+      narrate_sleep(
+        "You decided to go through the corridor...|"
+        + "The corridor is filled with holes...|"
+        + "Small holes...|"
+        + "There are rooms in which the doors are open...|"
+        + "They look like regular bedrooms...|"
+        + "You continued swimming until...|"
+        + "You reached the end of the corridor...|"
+        + "At the end of the corridor...|"
+        + "There is a room in the right...|"
+        + "You decided to go in that room...|"
+        + "Inside the room...|"
+        + "There is a big hole in the floor..."
+      )
+      ignore_hole = choose_place("Go in the hole or just ignore it?", "1 - Go in the hole.|2 - Ignore the hole.")
+
+      if ignore_hole == 1:
+        narrate_sleep(
+          "You just ignored the big hole...|"
+          + "You look around the room...|"
+          + "You saw a chest...|"
+          + "You tried to open it...|"
+          + "But it's locked...|"
+          + "You saw the key in a keyholder...|"
+          + "You swim to get it...|"
+          + "You now hold the key.|"
+          + "You used it to open the chest...|"
+          + "Inside the chest...|"
+          + "There is an interesting item...|"
+          + "You picked it up then..."
+        )
+      else:
+        narrate_sleep(
+          "You went inside the hole...|"
+          + "It is dark inside the hole...|"
+          + "You used your flashlight to see what's inside...|"
+          + "Something's shining at the end of the hole...|"
+          + "You continued swimming...|"
+          + "Now you are at the bottom of the hole...|"
+          + "The shining item is within your grasp...|"
+          + "You picked it up.|"
+          + "It looks like a very valuable item...|"
+          + "You are very happy on what you picked up...|"
+          + "Then..."
+        )
+
+      return ignore_hole
 
 """
     Function: Narrate Sleep
@@ -259,17 +335,17 @@ def narrate_sleep(messages, secs = 2, split_by = "|"):
 """
 def get_outcomes():
   # All negative outcomes
-  first_outcome = "You got sucked in by an unknown force and died.|Game Over..."
-  second_outcome = "The casket is a home of a sea vampire and he bit you.|You then runned out of blood and died.|Game Over..."
-  third_outcome = "You realize the room you went into contains bombs from world war 2 ready to explode.|Booooom!!!|Game Over..."
-  fourth_outcome = "You realize the room you went into is the home of an ancient sea dragon.|He gobbles you down in one bite.|Game Over..."
+  first_outcome = "You suddenly felt that the water around you is moving weird.|Then you suddenly got sucked in by an unknown force and died.|Game Over..."
+  second_outcome = "Boooom!!!|It turned out that the item you picked up is a bomb from World War 2.|Game Over..."
+  third_outcome = "The engine exploded...|You shouldn't have pulled the lever..|Tsk tsk...|Game Over..."
+  fourth_outcome = "The ocean suddenly shakes...|There is an earthquake...|One big mechanical part fell onto you...|You got crushed...|Game Over..."
   fifth_outcome = "You just found a historical item worth billions...|But the dragon gobbles you down in one bite...|Game Over..."
   sixth_outcome = "It's huge body appeared.|Uh oh...|The thing you are holding is a giant octopus's tentacle.|He stripped you down and devoured you...|Game Over..."
   seventh_outcome = "The shark's friends came to avenge his death...|You tried to swim away...|But there're sharks everywhere.|They came all at once...|And you got shredded to pieces.|Game Over..."
   eighth_outcome = "The shark caught up...|You tried to lose him again...|But...|He's more determined this time...|He opened his jaws...|And...|You became his dinner...|Game Over..."
 
   # The lone positive outcome
-  positive_outcome = "You just found a historical item worth billions.|You then returned home happily.|Game Over..."
+  positive_outcome = "You realized that...|You just found a historical item worth billions.|You then returned home happily.|Game Over..."
 
   nodes = [[[first_outcome,second_outcome],[third_outcome,fourth_outcome]],[[fifth_outcome,sixth_outcome],[seventh_outcome,eighth_outcome]]]
 
