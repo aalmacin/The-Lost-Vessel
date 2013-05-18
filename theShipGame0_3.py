@@ -1,40 +1,82 @@
-''' Author Name: Aldrin Jerome Almacin
+"""
+    Author Name: Aldrin Jerome Almacin
     Last Modified by: Aldrin Jerome Almacin
     Date last Modified:
     Program description: A game that asks the user to select paths that would lead to finding a treasure. There are 7 negative outcomes and one positive outcome. The player can then play the game again if desired.
     Revision History: 0.3
-'''
+"""
 import random
 import time
 
+"""
+    Function: Display Intro
+    Purpose: Displays the intro using narrate sleep.
+    Input: None
+    Output: The Narrated Introduction
+"""
 def display_intro():
-  narrate_sleep("You are a scuba diver searching for a lost vessel that sunk in the Pacific Ocean.|There's an abundance of tropical fish and sea creatures swimming beside you.|Your exploration reveals nothing significant until...|You discover a ship that matches what you are looking for.|You are now swimming beside this massive ship.|But you wanna know more about it.", 2)
+  narrate_sleep(\
+    "You are a scuba diver searching for a lost vessel that sunk in the Pacific Ocean.|"\
+    + "There's an abundance of tropical fish and sea creatures swimming beside you.|"\
+    + "Your exploration reveals nothing significant until...|"\
+    + "You discover a ship that matches what you are looking for.|"\
+    + "You are now swimming beside this massive ship.|"\
+    + "But you wanna know more about it."
+  , 2)
 
+"""
+    Function: Start Game
+    Purpose: Method to be called to start the game.
+    Input: The choices the user selected.
+    Output: The Narrated outcome
+"""
 def start_game():
   NONVALID_VALUE = 2
   outcomes = get_outcomes()
 
+  # Set all choices to nonvalid value. Can be used to determine whether the user wants to go back to first node.
   first_choice = NONVALID_VALUE
   second_choice = NONVALID_VALUE
   third_choice = NONVALID_VALUE
+
+  # As long as the third choice is not yet set into a valid index, ask the user where he/she is going to go base on where he/she is.
   while third_choice == NONVALID_VALUE:
+    # If no first choice selected yet ask the user
     if first_choice == NONVALID_VALUE:
       first_choice = get_first_choice()
+    # If no second choice selected yet ask the user
     if second_choice == NONVALID_VALUE:
       second_choice = get_second_choice(first_choice)
+      # If the user selected 3, then unset the first choice and narrate that the user is swimming back
       if second_choice == NONVALID_VALUE:
         first_choice = NONVALID_VALUE
         narrate_sleep("Swimming back outside the ship...")
+    # If the first choice and the second choice is already set, then get the third choice.
     if first_choice != NONVALID_VALUE and second_choice != NONVALID_VALUE:
       third_choice = get_third_choice(first_choice, second_choice)
 
-
+  # Show the outcome
   narrate_sleep(outcomes[first_choice][second_choice][third_choice])
 
+"""
+    Function: Get first choice
+    Purpose: Method used to get where the user wants to go in the first node.
+    Input: The users decision. Back or front of the ship
+    Output: The prompt on whether to go to the front or the back of the ship
+"""
 def get_first_choice():
   return choose_place("Do you want to investigate the front or back of the ship?", "1 for front or 2 for back")
 
+"""
+    Function: Get second choice
+    Purpose: Method used to get where the user wants to go in the second node. The story is based on the first decision.
+    Input: The users second decision.
+    Output: The prompt on which place the user wants to go to base on the first node decision
+"""
 def get_second_choice(back_of_the_ship):
+  # The number selected by the user is also used as a boolean. 0 to false, 1 to true
+  # The first  decision is used to determine what story should be shown to the user.
+  # The decision is then returned by the function
   if back_of_the_ship:
     narrate_sleep("You see a round window at the back of the ship, you managed to squeeze in.|The room you got into appears to be an officer's quarters.")
     return choose_place("Do you want to investigate the room further?", "1 for yes or 2 for no or 3 to swim back")
@@ -42,7 +84,17 @@ def get_second_choice(back_of_the_ship):
     narrate_sleep("You see a rusty hole in front of the ship, in which your scuba barely fits in the crack.|But were able to get in.|Now you see two corridors.")
     return choose_place("Which way would you go?", "1 for left or 2 for right or 3 to swim back")
 
+"""
+    Function: Get third choice
+    Purpose: Method used to get where the user wants to go in the third node. The decision is based on the first two decisions.
+    Input: The users third decision.
+    Output: The prompt on which place the user wants to go to base on the first and second node decision.
+"""
 def get_third_choice(back_of_the_ship, picked_two):
+  # The number selected by the user is also used as a boolean. 0 to false, 1 to true
+  # The first and second decision is used to determine what story should be shown to the user.
+  # The decision is then returned by the function
+  # Additional story narrations are added
   if back_of_the_ship:
     if picked_two:
       narrate_sleep("After you left the room...|You saw an item that looks like a chest.")
@@ -78,6 +130,12 @@ def get_third_choice(back_of_the_ship, picked_two):
 
       return opened_casket
 
+"""
+    Function: Narrate Sleep
+    Purpose: Method used to show the user messages from a string with separators. The program the sleeps for 1 or any number of seconds specified.
+    Input: None
+    Output: The messages sent by the user
+"""
 def narrate_sleep(messages, secs = 1, split_by = "|"):
   for message in messages.split(split_by):
     print(message)
