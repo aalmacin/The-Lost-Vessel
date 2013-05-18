@@ -159,6 +159,14 @@ def narrate_sleep(messages, secs = 1, split_by = "|"):
     print(message)
     time.sleep(secs)
 
+"""
+    Function: Get Outcomes
+    Purpose: Method used to get the outcomes stored in a 3d array
+    Input: None
+    Output: None
+    Params: None
+    Returns: 3d array which contains all the outcomes.
+"""
 def get_outcomes():
   # All negative outcomes
   first_outcome = "You got sucked in by an unknown force and died.|Game Over..."
@@ -174,20 +182,41 @@ def get_outcomes():
   positive_outcome = "You just found a historical item worth billions.|You then returned home happily.|Game Over..."
 
   nodes = [[[first_outcome,second_outcome],[third_outcome,fourth_outcome]],[[fifth_outcome,sixth_outcome],[seventh_outcome,eighth_outcome]]]
+
+  # Set the positive outcome randomly
   nodes[random.randint(0,1)][random.randint(0,1)][random.randint(0,1)] = positive_outcome
 
   return nodes
 
+"""
+    Function: Choose place
+    Purpose: Method used to ask the user on where he wants to go.
+    Input: The decision of the user
+    Output: The prompt that shows the question
+    Params:
+      question: The question to be shown to the user
+      num_choice: The message that contains the number choices
+    Returns: The decision of the user in integer subtracted by one. Substracted in order to become a valid index.
+"""
 def choose_place(question, num_choice):
   while True:
     place = raw_input("{0} ({1}): ".format(question,num_choice))
     if place == '1' or place == '2' or place == '3': break
   return (int(place) - 1)
 
+"""
+    Function: Main
+    Purpose: The main function run by the program
+    Input: The decision on whether to play again
+    Output: The prompt that asks whether the user wants to play again.
+    Params: None
+    Returns: None
+"""
 def main():
   while True:
     display_intro()
     start_game()
     if(not raw_input("Do you want to play again? (yes or no): ").lower() in ["yes","y"]): break
 
+# Calls the main function
 if __name__ == "__main__": main()
