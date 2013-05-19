@@ -50,8 +50,8 @@ def start_game():
     # If no first choice selected yet ask the user
     if first_choice == NONVALID_VALUE:
       first_choice = get_first_choice()
-    # If no second choice selected yet ask the user
-    if second_choice == NONVALID_VALUE:
+    # Make sure that the first choice is a valid value though
+    if second_choice == NONVALID_VALUE and first_choice != NONVALID_VALUE:
       second_choice = get_second_choice(first_choice)
       # If the user selected 3, then unset the first choice and narrate that the user is swimming back
       if second_choice == NONVALID_VALUE:
@@ -96,7 +96,7 @@ def get_second_choice(back_of_the_ship):
       + "Looking around...|"
       + "The room you got into appears to be an officer's quarters."
     )
-    return choose_place("Do you want to investigate the room further?", "1 - Investigate further.|2 - Leave the room.|3 - Swim back outside the ship.")
+    return choose_place("Do you want to investigate the room further?", "1 - Investigate further.|2 - Leave the room.|3 - Swim back outside the ship.", "|", True)
   else:
     narrate_sleep(
       "You see a rusty hole in front of the ship...|"
@@ -108,7 +108,7 @@ def get_second_choice(back_of_the_ship):
       + "After getting in...|"
       + "You now see a corridor and a staircase."
     )
-    return choose_place("Which way would you go?", "1 - Go through the corridor.|2 - Swim up the staircase.|3 - Swim back outside the ship.")
+    return choose_place("Which way would you go?", "1 - Go through the corridor.|2 - Swim up the staircase.|3 - Swim back outside the ship.", "|", True)
 
 """
     Function: Get third choice
@@ -364,13 +364,18 @@ def get_outcomes():
       num_choice: The message that contains the number choices
     Returns: The decision of the user in integer subtracted by one. Substracted in order to become a valid index.
 """
-def choose_place(question, num_choice, split_by = "|"):
+def choose_place(question, num_choice, split_by = "|", exempted = False):
   while True:
+    # SHow the question
     print(question)
+    # Show each option
     for choice in num_choice.split(split_by):
       print(choice)
+    # Take the choice
     place = raw_input(">>> ")
-    if place == '1' or place == '2' or place == '3': break
+    # Exit the loop if 3 is entered and is exempted.
+    if place == '3' and exempted: break
+    if place == '1' or place == '2': break
   return (int(place) - 1)
 
 """
